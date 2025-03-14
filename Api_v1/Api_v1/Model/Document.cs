@@ -2,37 +2,33 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace YourNamespace.Models
+public class Document
 {
-    [Table("Document", Schema = "Production")]
-    public class Document
-    {
-        [Key] public int DocumentNode { get; set; }
+    [Key] public int DocumentNode { get; set; }
 
-        public short DocumentLevel { get; set; }
+    public short DocumentLevel { get; set; }
 
-        [Required, StringLength(50)] public string Title { get; set; }
+    [Required, StringLength(50)] public string Title { get; set; }
 
-        [Required] public int Owner { get; set; }
+    [Required] public int Owner { get; set; }
 
-        [Required] public bool FolderFlag { get; set; }
+    [Required] public bool FolderFlag { get; set; }
 
-        [Required, StringLength(400)] public string FileName { get; set; }
+    [Required, StringLength(400)] public string FileName { get; set; }
 
-        [Required, StringLength(8)] public string FileExtension { get; set; }
+    [Required, StringLength(8)] public string FileExtension { get; set; }
 
-        [Required, StringLength(5)] public string Revision { get; set; }
+    [Required, StringLength(5)] public string Revision { get; set; }
 
-        [Required] public int ChangeNumber { get; set; }
+    [Required] public int ChangeNumber { get; set; }
 
-        [Required] public byte Status { get; set; }
+    [Required] public byte Status { get; set; }
 
-        public string DocumentSummary { get; set; }
+    public string DocumentSummary { get; set; }
 
-        public byte[] DocumentContent { get; set; }
+    public byte[] DocumentContent { get; set; }
 
-        [Required] public Guid Rowguid { get; set; }
+    [Required] public Guid Rowguid { get; set; }
 
-        [Required] public DateTime ModifiedDate { get; set; }
-    }
+    [Required] public DateTime ModifiedDate { get; set; }
 }
