@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Api_v1.Data;
+using Api_v1.Repositories;
 
 internal class Program
 {
@@ -7,13 +8,13 @@ internal class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-
         // Add services to the container.
-
         builder.Services.AddControllers();
+
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+
         builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
             sqlServerOptionsAction: sqlOptions =>
@@ -23,7 +24,10 @@ internal class Program
                     maxRetryDelay: TimeSpan.FromSeconds(30),
                     errorNumbersToAdd: null);
             }));
-        //builder.Services.AddScoped<ICustomerRepository, ICustomerRepository>();
+
+        // Registro del repositorio correcto
+        builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -34,11 +38,8 @@ internal class Program
         }
 
         app.UseHttpsRedirection();
-
         app.UseAuthorization();
-
         app.MapControllers();
-
         app.Run();
     }
 }
